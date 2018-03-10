@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section section-videos text-center" id="videos">
+    <div class="container">
+        <h2 class="title">Vídeos</h2>
+
+        {% for playlist in playlist_list %}
+            <h3>{{ playlist.title }}</h3>
+            <div class="row collections">
+                {% if playlist.code %}
+                    <div class="col-md-12">
+                        <div class="video-container">
+                            <iframe type="text/html" width="560" height="315"
+                                    src="https://www.youtube.com/embed/?listType=playlist&list={{ playlist.code }}&rel=0"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                {% endif %}
+                {% for video in playlist.video_set.all %}
+                    <div class="col-md-6">
+                        <span class="title">{{ video.title }}</span>
+                        <div class="video-container">
+                            <iframe type="text/html" width="560" height="315"
+                                    src="https://www.youtube.com/embed/{{ video.code }}?rel=0"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if not forloop.last %}
+                <hr/>
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% block head %}
+    <link href="{% static "galereya/css/jquery.galereya.css" %}" rel="stylesheet"/>
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="{% static "galereya/css/jquery.galereya.ie.css" %}">
+    <![endif]-->
+{% endblock head %}
+
+{% block script %}
+    <script src="{% static "galereya/js/jquery.galereya.min.js" %}"></script>
+    <script>
+        $(function () {
+            $('#galleryherepls').galereya({
+                //spacing between cells of the masonry grid
+                spacing: 10,
+
+                //waving visual effect
+                wave: true,
+
+                //waving visual effect timeout duration
+                waveTimeout: 1000,
+
+                // special CSS modifier for the gallery
+                modifier: '',
+
+                //speed of the slide show
+                slideShowSpeed: 6000,
+
+                //speed of appearance of cells
+                cellFadeInSpeed: 200
+            });
+        });
+    </script>
+{% endblock script %}
+
+{% block content %}
+    <div class="section text-center" id="participacoes">
+        <div class="container">
+            <h2 class="title">Fotos</h2>
+            <div class="photos profile-page">
+                <div class="row collections">
+                    <div id="galleryherepls">
+                        {% for photo in photo_list %}
+                            <img src="{{ photo.image.thumbnail.1080x1080 }}"
+                                 alt="{{ photo.title }}"
+                                 title="{{ photo.title }}"
+                                 data-fullsrc="{{ photo.image.url }}"
+                                 class="img-fluid img-raised"
+                            />
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.35);
+        }
+    </style>
+
+    <div class="section" id="carousel">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-8">
+                    <div id="carouselHome" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            {% for banner in banner_list %}
+                                <li data-target="#carouselHomeIndicators" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+                            {% endfor %}
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                            {% for banner in banner_list %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img class="d-block" src="{{ banner.image.thumbnail.800x800 }}" alt="{{ banner.title }}">
+                                    <div class="carousel-caption">
+                                        <h3>{{ banner.title }}</h3>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselHome" role="button" data-slide="prev">
+                            <i class="now-ui-icons arrows-1_minimal-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselHome" role="button" data-slide="next">
+                            <i class="now-ui-icons arrows-1_minimal-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="patrocinadores" class="col-sm-3 offset-sm-1" data-background-color="black">
+                    <p class="category">Patrocinadores</p>
+                    {% for sponsor in sponsor_list %}
+                        <a  href="{{ sponsor.link }}" target="_blank" rel="nofollow">
+                            <img src="{{ sponsor.logo.thumbnail.350x350 }}" alt="Imagem do Patrocinador {{ sponsor.name }}"/>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

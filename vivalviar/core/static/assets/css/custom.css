@@ -1,0 +1,59 @@
+#participacoes .team-player img {
+    margin-top: 30px;
+}
+
+.section-participacoes {
+    background: #EEEEEE;
+}
+
+.brand .n-logo {
+    max-width: 100px;
+    margin-bottom: 40px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-container {
+    margin-bottom: 1rem;
+}
+
+#patrocinadores a img {
+    margin-top: 1rem;
+}
+
+table.rank {
+    counter-reset: rowNumber;
+}
+
+table.rank tr>td:first-child {
+    counter-increment: rowNumber;
+}
+
+table.rank tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}

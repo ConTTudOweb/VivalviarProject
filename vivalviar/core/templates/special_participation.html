@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="section section-participacoes text-center" id="participacoes">
+        <div class="container">
+            <h2 class="title">Participações Especiais</h2>
+            <h3 class="description">
+                "Página destinada a todas as participações especiais que estiveram conosco desde o início"
+            </h3>
+            <div class="team">
+                <div class="row">
+                    {% for special_participation in special_participation_list %}
+                        <div class="col-md-4">
+                            <div class="team-player">
+                                <img src="{{ special_participation.image.crop.300x300 }}" alt="{{ special_participation.name }}"
+                                     class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">{{ special_participation.name }}</h4>
+                                <p class="category text-primary">{{ special_participation.country|default_if_none:"" }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -77,14 +77,15 @@ APPS += (
     'test_without_migrations',
     'django_extensions',
     'debug_toolbar',
+    'versatileimagefield',
 )
 
 # Project Apps
 APPS += (
-    'vivalvivar.authentication',
-    'vivalvivar.core',
+    'vivalviar.authentication',
+    'vivalviar.core',
 
-    # 'vivalvivar.frontend',
+    # 'vivalviar.frontend',
 )
 
 INSTALLED_APPS = APPS
@@ -171,3 +172,31 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# VersatileImageField
+
+# Settings for versatileimagefield
+VERSATILEIMAGEFIELD_SETTINGS = {
+    # Whether or not to create new images on-the-fly. Set this to `False` for
+    # speedy performance but don't forget to 'pre-warm' to ensure they're
+    # created and available at the appropriate URL.
+    'create_images_on_demand': False,
+}
+
+VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
+    'banner': [
+        ('banner_thumbnail_300', 'thumbnail__300x300'),
+        ('banner_thumbnail_800', 'thumbnail__800x800'),
+    ],
+    'sponsor': [
+        ('sponsor_thumbnail', 'thumbnail__350x350'),
+    ],
+    'special_participation': [
+        ('special_participation_crop', 'crop__300x300'),
+    ],
+    'photo': [
+        ('photo_thumbnail_300', 'thumbnail__300x300'),
+        ('photo_thumbnail_1080', 'thumbnail__1080x1080'),
+    ],
+}

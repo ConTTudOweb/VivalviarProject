@@ -25,3 +25,6 @@ Comando para desabilitar o collectstatic do heroku
 ```console
 heroku config:set DISABLE_COLLECTSTATIC=1
 ```
+
+Site para pegar o ID dos videos da play list
+[http://www.williamsportwebdeveloper.com/FavBackUp.aspx](http://www.williamsportwebdeveloper.com/FavBackUp.aspx)
