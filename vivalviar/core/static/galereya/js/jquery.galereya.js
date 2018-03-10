@@ -765,6 +765,7 @@
                 $(this).galereya(options);
             });
         }
+        //noinspection JSAnnotator
         return this;
     }
 
