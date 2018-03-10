@@ -187,7 +187,7 @@ VERSATILEIMAGEFIELD_SETTINGS = {
 VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
     'banner': [
         ('banner_thumbnail_300', 'thumbnail__300x300'),
-        ('banner_thumbnail_800', 'thumbnail__800x800'),
+        ('banner_thumbnail_873', 'thumbnail__873x1280'),
     ],
     'sponsor': [
         ('sponsor_thumbnail', 'thumbnail__350x350'),

@@ -15,7 +15,7 @@ def banner_directory_path(instance, filename):
 class Banner(models.Model):
     title = models.CharField('título', max_length=250, unique=True)
     image = VersatileImageField('imagem', upload_to=banner_directory_path,
-                                help_text='Imagem com: 800 X 800 pixels')
+                                help_text='Imagem com: 873 X 1280 pixels')
 
     def image_thumbnail_300(self):
         return format_html('<img src="{}"/>',
