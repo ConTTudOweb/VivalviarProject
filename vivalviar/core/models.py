@@ -6,9 +6,10 @@ from versatileimagefield.fields import VersatileImageField
 from versatileimagefield.image_warmer import VersatileImageFieldWarmer
 
 
-def banner_directory_path(instance, _):
-    # file will be uploaded to MEDIA_ROOT/banners/<filename>
-    return 'banners/{0}'.format(slugify(instance.title))
+def banner_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/banners/<instance.title>
+    ext = filename.split('.')[-1]
+    return 'banners/{0}.{1}'.format(slugify(instance.title), ext)
 
 
 class Banner(models.Model):
@@ -49,9 +50,10 @@ def delete_Banner_files(sender, instance, **kwargs):
     instance.image.delete(save=False)
 
 
-def sponsor_directory_path(instance, _):
-    # file will be uploaded to MEDIA_ROOT/sponsors/<filename>
-    return 'sponsors/{0}'.format(slugify(instance.name))
+def sponsor_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/sponsors/<instance.name>
+    ext = filename.split('.')[-1]
+    return 'sponsors/{0}.{1}'.format(slugify(instance.name), ext)
 
 
 class Sponsor(models.Model):
@@ -98,9 +100,10 @@ def delete_sponsor_file(_, instance, **kwargs):
     instance.logo.delete(save=False)
 
 
-def special_participation_directory_path(instance, _):
-    # file will be uploaded to MEDIA_ROOT/special_participations/<filename>
-    return 'special_participations/{0}'.format(slugify(instance.name))
+def special_participation_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/special_participations/<instance.name>
+    ext = filename.split('.')[-1]
+    return 'special_participations/{0}.{1}'.format(slugify(instance.name), ext)
 
 
 class SpecialParticipation(models.Model):
@@ -147,9 +150,10 @@ def delete_special_participation_files(sender, instance, **kwargs):
     instance.image.delete(save=False)
 
 
-def photo_directory_path(instance, _):
-    # file will be uploaded to MEDIA_ROOT/photos/<filename>-<PK>
-    return 'photos/{0}-{1}'.format(slugify(instance.title), instance.id)
+def photo_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/photos/<instance.title>-<PK>
+    ext = filename.split('.')[-1]
+    return 'photos/{0}-{1}.{2}'.format(slugify(instance.title), instance.id, ext)
 
 
 class Photo(models.Model):
