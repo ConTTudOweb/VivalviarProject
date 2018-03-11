@@ -1,6 +1,7 @@
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser,
     PermissionsMixin)
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 
@@ -36,13 +37,24 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
-        verbose_name='email address',
+        verbose_name=_('email address'),
         max_length=255,
         unique=True,
     )
-    date_of_birth = models.DateField(null=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    date_of_birth = models.DateField('data de nascimento', null=True, blank=True)
+    is_active = models.BooleanField(
+        _('active'),
+        default=True,
+        help_text=_(
+            'Designates whether this user should be treated as active. '
+            'Unselect this instead of deleting accounts.'
+        ),
+    )
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=False,
+        help_text=_('Designates whether the user can log into this admin site.'),
+    )
 
     # username = models.CharField(
     #     _('username'),
@@ -54,8 +66,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     #         'unique': _("A user with that username already exists."),
     #     },
     # )
-    first_name = models.CharField('first name', max_length=30, blank=True)
-    last_name = models.CharField('last name', max_length=150, blank=True)
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=150, blank=True)
 
     @property
     def username(self):
