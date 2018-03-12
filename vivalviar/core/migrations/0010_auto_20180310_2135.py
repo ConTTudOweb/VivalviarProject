@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='banner',
             name='image',
-            field=versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 873 X 1280 pixels', upload_to=vivalviar.core.models.banner_directory_path, verbose_name='imagem'),
+            field=versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 873 X 1280 pixels', verbose_name='imagem'),
         ),
     ]

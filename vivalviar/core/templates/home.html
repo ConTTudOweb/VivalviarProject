@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cloudinary %}
 
 {% block content %}
     <style>
@@ -20,7 +21,7 @@
                         <div class="carousel-inner" role="listbox">
                             {% for banner in banner_list %}
                                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                    <img class="d-block" src="{{ banner.image.thumbnail.873x1280 }}" alt="{{ banner.title }}">
+                                    {% cloudinary banner.image THUMBNAIL_873_1280 alt=banner.title class="d-block" %}
                                     <!--<div class="carousel-caption">
                                         <h3>{{ banner.title }}</h3>
                                     </div>-->
@@ -40,7 +41,7 @@
                     <p class="category">Patrocinadores</p>
                     {% for sponsor in sponsor_list %}
                         <a  href="{{ sponsor.link }}" target="_blank" rel="nofollow">
-                            <img src="{{ sponsor.logo.thumbnail.350x350 }}" alt="Imagem do Patrocinador {{ sponsor.name }}"/>
+                            {% cloudinary sponsor.logo THUMBNAIL_350 alt=sponsor.name %}
                         </a>
                     {% endfor %}
                 </div>

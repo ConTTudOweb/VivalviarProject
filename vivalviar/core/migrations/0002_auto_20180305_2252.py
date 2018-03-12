@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=250, verbose_name='nome')),
                 ('link', models.CharField(max_length=250)),
-                ('logo', versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 350 X 350 pixels', upload_to=vivalviar.core.models.sponsor_directory_path, verbose_name='logotipo')),
+                ('logo', versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 350 X 350 pixels', verbose_name='logotipo')),
                 ('position', models.IntegerField(default=0, verbose_name='posição')),
             ],
             options={
@@ -30,6 +30,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='banner',
             name='image',
-            field=versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 800 X 800 pixels', upload_to=vivalviar.core.models.banner_directory_path, verbose_name='imagem'),
+            field=versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 800 X 800 pixels', verbose_name='imagem'),
         ),
     ]

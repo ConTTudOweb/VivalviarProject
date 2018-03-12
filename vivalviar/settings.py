@@ -17,6 +17,10 @@ from decouple import config, Csv
 from dj_database_url import parse as dburl
 from django.contrib.messages import constants as message_constants
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -78,6 +82,7 @@ APPS += (
     'django_extensions',
     'debug_toolbar',
     'versatileimagefield',
+    'cloudinary',
 )
 
 # Project Apps
@@ -115,6 +120,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'vivalviar.core.context_processors.consts',
             ],
         },
     },
@@ -200,3 +207,10 @@ VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
         ('photo_thumbnail_1080', 'thumbnail__1080x1080'),
     ],
 }
+
+
+cloudinary.config(
+    cloud_name=config('CLOUD_NAME'),
+    api_key=config('API_KEY'),
+    api_secret=config('API_SECRET')
+)

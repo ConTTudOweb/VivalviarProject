@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=250, verbose_name='título')),
-                ('image', versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 300 X 300 pixels', upload_to=vivalviar.core.models.banner_directory_path, verbose_name='imagem')),
+                ('image', versatileimagefield.fields.VersatileImageField(help_text='Imagem com: 300 X 300 pixels', verbose_name='imagem')),
             ],
         ),
     ]

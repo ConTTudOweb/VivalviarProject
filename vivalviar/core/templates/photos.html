@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cloudinary %}
 
 {% load static from staticfiles %}
 {% block head %}
@@ -29,7 +30,10 @@
                 slideShowSpeed: 6000,
 
                 //speed of appearance of cells
-                cellFadeInSpeed: 200
+                cellFadeInSpeed: 200,
+
+                //set to true, if you don't want to show the slider on the cell click.
+                disableSliderOnClick: true
             });
         });
     </script>
@@ -43,12 +47,7 @@
                 <div class="row collections">
                     <div id="galleryherepls">
                         {% for photo in photo_list %}
-                            <img src="{{ photo.image.thumbnail.1080x1080 }}"
-                                 alt="{{ photo.title }}"
-                                 title="{{ photo.title }}"
-                                 data-fullsrc="{{ photo.image.url }}"
-                                 class="img-fluid img-raised"
-                            />
+                            {% cloudinary photo.image THUMBNAIL_1080_1080 alt=photo.title class="img-fluid img-raised" title=photo.title %}
                         {% endfor %}
                     </div>
                 </div>
