@@ -216,3 +216,77 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Team(models.Model):
+    name = models.CharField('nome', max_length=250, unique=True)
+    logo = CloudinaryField('logotipo', null=True, blank=True, help_text='Imagem com: 350 X 350 pixels')
+    # players = models.ManyToManyField('Player', verbose_name='jogadores')
+
+    def logo_fill_350(self):
+        return format_html(self.logo.image(width=350, height=350, crop="fill"))
+
+    logo_fill_350.allow_tags = True
+    logo_fill_350.short_description = 'logotipo'
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'time'
+        verbose_name_plural = 'times'
+        ordering = ('name',)
+
+
+class Player(models.Model):
+    name = models.CharField('nome', max_length=250, unique=True)
+    team = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'jogador'
+        verbose_name_plural = 'jogadores'
+        ordering = ('name',)
+
+
+class Circuit(models.Model):
+    description = models.CharField('descrição', max_length=250, unique=True)
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'circuito'
+        verbose_name_plural = 'circuitos'
+        ordering = ('description',)
+
+
+class Tournament(models.Model):
+    description = models.CharField('descrição', max_length=250, unique=True)
+    circuit = models.ForeignKey('Circuit', on_delete=models.PROTECT, verbose_name='circuito')
+    players = models.ManyToManyField('Player', through='Ranking')
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'torneio'
+        verbose_name_plural = 'torneios'
+        ordering = ('description',)
+
+
+class Ranking(models.Model):
+    player = models.ForeignKey('Player', on_delete=models.PROTECT)
+    tournament = models.ForeignKey('Tournament', on_delete=models.PROTECT)
+    position = models.PositiveIntegerField('posição')
+
+    def __str__(self):
+        return str(self.player)
+
+    class Meta:
+        verbose_name = 'classificação'
+        verbose_name_plural = 'classificações'
+        ordering = ('tournament', 'position')
+        unique_together = ('tournament', 'position')
