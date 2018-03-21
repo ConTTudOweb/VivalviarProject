@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from .core.views import home, history, special_participation, photos, playlist, contact_us
+from .core.views import home, history, special_participation, photos, playlist, contact_us, champions
 
 urlpatterns = []
 if settings.DEVELOPER:
@@ -31,6 +31,7 @@ urlpatterns += [
 
     path('', home, name='home'),
     path('historia/', history, name='history'),
+    path('campeoes/', champions, name='champions'),
     path('participacoes_especiais/', special_participation, name='special_participation'),
     path('fotos/', photos, name='photos'),
     path('videos/', playlist, name='playlist'),

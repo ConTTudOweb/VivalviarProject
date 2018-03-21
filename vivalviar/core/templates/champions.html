@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="section" id="historico">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h2>Campeões Vivalviar Poker:</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <th>Nome</th>
+                            <th>Títulos</th>
+                        </thead>
+                        <tbody>
+                            {% for champions in ranking_first_list %}
+                            <tr>
+                                <td>{{ champions.player__name }}</td>
+                                <td>{{ champions.player_position }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
