@@ -46,7 +46,7 @@ table.rank tr>td:first-child {
 }
 
 table.rank tr td:first-child::before {
-    content: counter(rowNumber);
+    content: counter(rowNumber)"º";
     min-width: 1em;
     margin-right: 0.5em;
 }

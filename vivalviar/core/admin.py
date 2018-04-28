@@ -3,7 +3,6 @@ from django.contrib import admin
 from vivalviar.core.models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Video, Player, Team, Circuit, \
     Tournament, Ranking
 
-
 admin.site.site_header = 'Vivalviar Poker'
 admin.site.site_title = 'Vivalviar'
 admin.site.index_title = 'Início'
@@ -45,10 +44,16 @@ class PlayListModelAdmin(CustomModelAdmin):
     ]
 
 
+# @admin.register(Country)
+# class CountryModelAdmin(CustomModelAdmin):
+#     list_display = ('name', 'flag_fit_250')
+#     search_fields = ('name',)
+
+
 @admin.register(Player)
 class PlayerModelAdmin(CustomModelAdmin):
-    list_display = ('name', 'team')
-    search_fields = ('name', 'team')
+    list_display = ('name', 'team', 'country')
+    search_fields = ('name', 'team', 'country')
 
 
 @admin.register(Team)

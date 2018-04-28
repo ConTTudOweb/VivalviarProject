@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Sum, Case, When, Value, IntegerField, F
 from django.views.generic import TemplateView
 
 from vivalviar.core.models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Ranking
@@ -66,8 +66,39 @@ class ChampionsPageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ChampionsPageView, self).get_context_data(**kwargs)
-        ranking_first_list = Ranking.objects.filter(position=1).values('player__name').annotate(
-            player_position=Sum('position')).order_by('-player_position')
+        ranking_first_list = Ranking.objects.filter(position__lte=3)\
+            .values('player__name', 'player__country') \
+            .annotate(
+                player_position_1st=Sum(
+                    Case(
+                        When(position=1, then=Value(1)),
+                        default=Value(0),
+                        output_field=IntegerField(),
+                    )
+                ),
+                player_position_2nd=Sum(
+                    Case(
+                        When(position=2, then=Value(1)),
+                        default=Value(0),
+                        output_field=IntegerField(),
+                    )
+                ),
+                player_position_3rd=Sum(
+                    Case(
+                        When(position=3, then=Value(1)),
+                        default=Value(0),
+                        output_field=IntegerField(),
+                    )
+                ),
+                player_position_total=Sum(
+                    Case(
+                        When(position__lte=3, then=Value(1)),
+                        default=Value(0),
+                        output_field=IntegerField(),
+                    )
+                ),
+            ) \
+            .order_by('-player_position_1st', '-player_position_2nd', '-player_position_3rd')
         context['ranking_first_list'] = ranking_first_list
         return context
 
