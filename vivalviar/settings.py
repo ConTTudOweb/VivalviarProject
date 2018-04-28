@@ -86,6 +86,8 @@ APPS += (
     'debug_toolbar',
     # 'versatileimagefield',
     'cloudinary',
+
+    # https://pypi.org/project/django-countries/
     'django_countries',
 )
 

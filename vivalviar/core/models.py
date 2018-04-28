@@ -117,25 +117,6 @@ class Team(models.Model):
         ordering = ('name',)
 
 
-# class Country(models.Model):
-#     name = models.CharField('nome', max_length=250, unique=True)
-#     flag = CloudinaryField('bandeira', null=True, blank=True, help_text='Imagem com: 250 X 250 pixels')
-#
-#     def flag_fit_250(self):
-#         return format_html(self.flag.image(width=250, height=250, crop="fit"))
-#
-#     flag_fit_250.allow_tags = True
-#     flag_fit_250.short_description = 'bandeira'
-#
-#     def __str__(self):
-#         return self.name
-#
-#     class Meta:
-#         verbose_name = 'país'
-#         verbose_name_plural = 'países'
-#         ordering = ('name',)
-
-
 class Player(models.Model):
     name = models.CharField('nome', max_length=250, unique=True)
     team = models.ForeignKey('Team', verbose_name=Team._meta.verbose_name, on_delete=models.SET_NULL, null=True,
