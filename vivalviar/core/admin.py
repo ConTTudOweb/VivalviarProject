@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from vivalviar.core.models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Video, Player, Team, Circuit, \
-    Tournament, Ranking
+from vivalviar.core.models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Video, Player, Team, \
+    Circuit, Tournament, Ranking
 
 admin.site.site_header = 'Vivalviar Poker'
 admin.site.site_title = 'Vivalviar'
