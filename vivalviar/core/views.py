@@ -98,7 +98,7 @@ class ChampionsPageView(TemplateView):
                     )
                 ),
             ) \
-            .order_by('-player_position_1st', '-player_position_2nd', '-player_position_3rd')
+            .order_by('-player_position_1st', '-player_position_2nd', '-player_position_3rd', 'player__name')
         context['ranking_first_list'] = ranking_first_list
         return context
 
