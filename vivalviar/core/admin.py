@@ -44,12 +44,6 @@ class PlayListModelAdmin(CustomModelAdmin):
     ]
 
 
-# @admin.register(Country)
-# class CountryModelAdmin(CustomModelAdmin):
-#     list_display = ('name', 'flag_fit_250')
-#     search_fields = ('name',)
-
-
 @admin.register(Player)
 class PlayerModelAdmin(CustomModelAdmin):
     list_display = ('name', 'team', 'country')
@@ -70,6 +64,7 @@ class CircuitModelAdmin(CustomModelAdmin):
 
 class RankingInline(admin.TabularInline):
     model = Ranking
+    autocomplete_fields = ('player',)
 
 
 @admin.register(Tournament)

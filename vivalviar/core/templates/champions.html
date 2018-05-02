@@ -12,23 +12,24 @@
             <div class="row justify-content-center">
                 <div class="col-8">
                     <h2>Campeões Vivalviar Poker:</h2>
-                    <table class="table table-hover rank">
+                    <table class="table table-hover table-striped rank">
                         <thead>
+                            <th class="text-right">#</th>
                             <th>Nacionalidade</th>
                             <th>Nome</th>
-                            <th>
+                            <th class="text-right table-warning img-raised">
                                 1º
                                 <img src="{% static "assets/img/medal/medal-1st_640.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
-                            <th>
+                            <th class="text-right">
                                 2º
                                 <img src="{% static "assets/img/medal/medal-2nd_640.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
-                            <th>
+                            <th class="text-right">
                                 3º
                                 <img src="{% static "assets/img/medal/medal-3rd_640.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
-                            <th>
+                            <th class="text-right">
                                 Total
                                 <img src="{% static "assets/img/medal/medals-total_640.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
@@ -37,12 +38,13 @@
                             {% for champions in ranking_first_list %}
                                 {% get_country champions.player__country as country %}
                                 <tr>
+                                    <td class="text-right"></td>
                                     <td><i class="{{ country.flag_css }}"></i> {{ country.name }}</td>
                                     <td>{{ champions.player__name }}</td>
-                                    <td>{{ champions.player_position_1st }}</td>
-                                    <td>{{ champions.player_position_2nd }}</td>
-                                    <td>{{ champions.player_position_3rd }}</td>
-                                    <td>{{ champions.player_position_total }}</td>
+                                    <td class="text-right table-warning img-raised">{{ champions.player_position_1st }}</td>
+                                    <td class="text-right">{{ champions.player_position_2nd }}</td>
+                                    <td class="text-right">{{ champions.player_position_3rd }}</td>
+                                    <td class="text-right">{{ champions.player_position_total }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

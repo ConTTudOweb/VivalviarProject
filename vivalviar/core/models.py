@@ -148,6 +148,19 @@ class Tournament(models.Model):
     description = models.CharField('descrição', max_length=250, unique=True)
     circuit = models.ForeignKey('Circuit', on_delete=models.PROTECT, verbose_name='circuito')
     players = models.ManyToManyField('Player', through='Ranking')
+    date = models.DateField('data', null=True, blank=True)
+    PRESENTIAL = 'P'
+    ONLINE = 'O'
+    TYPE_CHOICES = (
+        (ONLINE, 'Online'),
+        (PRESENTIAL, 'Presencial'),
+    )
+    type = models.CharField(
+        'tipo',
+        max_length=1,
+        choices=TYPE_CHOICES,
+        default=ONLINE,
+    )
 
     def __str__(self):
         return self.description

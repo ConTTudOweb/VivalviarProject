@@ -84,7 +84,7 @@ APPS += (
     'test_without_migrations',
     'django_extensions',
     'debug_toolbar',
-    # 'versatileimagefield',
+    'versatileimagefield',
     'cloudinary',
 
     # https://pypi.org/project/django-countries/
