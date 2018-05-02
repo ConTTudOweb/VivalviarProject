@@ -47,7 +47,7 @@ class PlayListModelAdmin(CustomModelAdmin):
 @admin.register(Player)
 class PlayerModelAdmin(CustomModelAdmin):
     list_display = ('name', 'team', 'country')
-    search_fields = ('name', 'team', 'country')
+    search_fields = ('name', 'team__name')
 
 
 @admin.register(Team)
