@@ -1,5 +1,7 @@
+import itertools
 from cloudinary.models import CloudinaryField
 from django.db import models
+from django.db.models import Sum, Case, When, Value, IntegerField, Count, Q, F, PositiveIntegerField, Avg
 from django.utils.html import format_html
 from django_countries.fields import CountryField
 
@@ -135,6 +137,37 @@ class Player(models.Model):
 class Circuit(models.Model):
     description = models.CharField('descrição', max_length=250, unique=True)
 
+    @property
+    def players_list(self):
+        qs = Ranking.objects.filter(tournament__in=self.tournament_set.all()) \
+            .values('player__name', 'tournament') \
+            .annotate(
+            points=
+            (
+                (
+                    Count('tournament__ranking__id', output_field=IntegerField())
+                    - Avg('position', output_field=IntegerField())
+                    + 1
+                ) * 10
+            ) +
+            Case(
+                When(position=1, then=Value(15)),
+                When(position=2, then=Value(5)),
+                default=Value(0),
+                output_field=IntegerField(),
+            ),
+
+        ).order_by('player__name')
+
+        grouped = itertools.groupby(qs, lambda d: d.get('player__name'))
+
+        players_list = [{'player__name': label,
+                         'points': int(sum([x['points'] for x in value])),
+                         }
+                        for label, value in grouped]
+
+        return players_list
+
     def __str__(self):
         return self.description
 
@@ -161,6 +194,10 @@ class Tournament(models.Model):
         choices=TYPE_CHOICES,
         default=ONLINE,
     )
+
+    @property
+    def players_count(self):
+        return self.players.count()
 
     def __str__(self):
         return self.description

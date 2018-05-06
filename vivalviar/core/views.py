@@ -1,7 +1,7 @@
 from django.db.models import Sum, Case, When, Value, IntegerField, F
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 
-from vivalviar.core.models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Ranking
+from .models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Ranking, Circuit
 
 
 class HomePageView(TemplateView):
@@ -104,3 +104,7 @@ class ChampionsPageView(TemplateView):
 
 
 champions = ChampionsPageView.as_view()
+
+
+class CircuitDetailView(DetailView):
+    model = Circuit
