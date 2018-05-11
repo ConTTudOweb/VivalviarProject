@@ -18,7 +18,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from .core.views import home, history, special_participation, photos, playlist, contact_us, champions, CircuitDetailView
+from .core.views import home, history, special_participation, photos, playlist, contact_us, champions, \
+    CircuitDetailView, CircuitListView
 
 urlpatterns = []
 if settings.DEVELOPER:
@@ -36,7 +37,8 @@ urlpatterns += [
     path('fotos/', photos, name='photos'),
     path('videos/', playlist, name='playlist'),
     path('fale_conosco/', contact_us, name='contact_us'),
-    path('circuits/<int:pk>/', CircuitDetailView.as_view(), name='circuit-detail')
+    path('circuitos/', CircuitListView.as_view(), name='circuit-list'),
+    path('circuitos/<int:pk>/', CircuitDetailView.as_view(), name='circuit-detail')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

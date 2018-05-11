@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="section" id="historico">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    {% for circuit in circuit_list %}
+                        <a href="{% url 'circuit-detail' circuit.pk %}" class="alert-info">
+                            <h2><i class="fa fa-info-circle"></i> {{ circuit }}</h2>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

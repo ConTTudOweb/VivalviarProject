@@ -1,5 +1,5 @@
 from django.db.models import Sum, Case, When, Value, IntegerField, F
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Ranking, Circuit
 
@@ -107,4 +107,8 @@ champions = ChampionsPageView.as_view()
 
 
 class CircuitDetailView(DetailView):
+    model = Circuit
+
+
+class CircuitListView(ListView):
     model = Circuit
