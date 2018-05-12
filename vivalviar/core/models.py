@@ -179,7 +179,7 @@ class Circuit(models.Model):
 
 class Tournament(models.Model):
     description = models.CharField('descrição', max_length=250, unique=True)
-    circuit = models.ForeignKey('Circuit', on_delete=models.PROTECT, verbose_name='circuito')
+    circuit = models.ForeignKey('Circuit', on_delete=models.SET_NULL, verbose_name='circuito', null=True, blank=True)
     players = models.ManyToManyField('Player', through='Ranking')
     date = models.DateField('data', null=True, blank=True)
     PRESENTIAL = 'P'
