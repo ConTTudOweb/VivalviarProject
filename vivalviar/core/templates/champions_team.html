@@ -13,7 +13,7 @@
 {% block champions_tds %}
     <td>
         {% if champions.player__team__logo %}
-            {% cloudinary champions.player__team__logo THUMBNAIL_150 alt=champions.player__team__name class='img-responsive' style='height: 2rem;' %}
+            {% cloudinary champions.player__team__logo height=100 crop="fill" alt=champions.player__team__name class='img-responsive' style='height: 2rem;' %}
         {% endif %}
     </td>
     <td>{{ champions.player__team__name }}</td>
