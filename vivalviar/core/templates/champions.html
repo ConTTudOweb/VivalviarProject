@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load countries %}
+{% load cloudinary %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
@@ -18,19 +19,19 @@
                             {% block champions_ths %}{% endblock %}
                             <th class="text-right table-warning img-raised">
                                 1º
-                                <img src="{% static "assets/img/medal/medal-1st_640.png" %}" class="img-responsive" style="max-height: 1rem">
+                                <img src="{% static "assets/img/medal/medal-1st_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
                             <th class="text-right">
                                 2º
-                                <img src="{% static "assets/img/medal/medal-2nd_640.png" %}" class="img-responsive" style="max-height: 1rem">
+                                <img src="{% static "assets/img/medal/medal-2nd_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
                             <th class="text-right">
                                 3º
-                                <img src="{% static "assets/img/medal/medal-3rd_640.png" %}" class="img-responsive" style="max-height: 1rem">
+                                <img src="{% static "assets/img/medal/medal-3rd_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
                             <th class="text-right">
                                 Total
-                                <img src="{% static "assets/img/medal/medals-total_640.png" %}" class="img-responsive" style="max-height: 1rem">
+                                <img src="{% static "assets/img/medal/medals-total_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
                             </th>
                         </thead>
                         <tbody>
