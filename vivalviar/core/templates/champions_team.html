@@ -1,0 +1,20 @@
+{% extends 'champions.html' %}
+{% load cloudinary %}
+
+{% block champions_title %}
+    Times Campeões:
+{% endblock champions_title %}
+
+{% block champions_ths %}
+    <th></th>
+    <th>Time</th>
+{% endblock %}
+
+{% block champions_tds %}
+    <td>
+        {% if champions.player__team__logo %}
+            {% cloudinary champions.player__team__logo THUMBNAIL_150 alt=champions.player__team__name class='img-responsive' style='height: 2rem;' %}
+        {% endif %}
+    </td>
+    <td>{{ champions.player__team__name }}</td>
+{% endblock %}

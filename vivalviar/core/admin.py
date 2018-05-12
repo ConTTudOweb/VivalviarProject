@@ -50,10 +50,17 @@ class PlayerModelAdmin(CustomModelAdmin):
     search_fields = ('name', 'team__name')
 
 
+class PlayerInline(admin.TabularInline):
+    model = Player
+    readonly_fields = ('name', 'country')
+    extra = 0
+
+
 @admin.register(Team)
 class TeamModelAdmin(CustomModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
+    inlines = [PlayerInline]
 
 
 @admin.register(Circuit)

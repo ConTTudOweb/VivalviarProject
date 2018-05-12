@@ -1,0 +1,15 @@
+{% extends 'champions.html' %}
+
+{% block champions_title %}
+    Campeões Vivalviar Poker:
+{% endblock %}
+
+{% block champions_ths %}
+    <th>Nacionalidade</th>
+    <th>Nome</th>
+{% endblock %}
+
+{% block champions_tds %}
+    <td><i class="{{ country.flag_css }}"></i> {{ country.name }}</td>
+    <td>{{ champions.player__name }}</td>
+{% endblock %}

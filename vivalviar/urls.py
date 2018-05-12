@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from .core.views import home, history, special_participation, photos, playlist, contact_us, champions, \
-    CircuitDetailView, CircuitListView
+    CircuitDetailView, CircuitListView, champions_team
 
 urlpatterns = []
 if settings.DEVELOPER:
@@ -33,6 +33,7 @@ urlpatterns += [
     path('', home, name='home'),
     path('historia/', history, name='history'),
     path('campeoes/', champions, name='champions'),
+    path('campeoes/times/', champions_team, name='champions_team'),
     path('participacoes_especiais/', special_participation, name='special_participation'),
     path('fotos/', photos, name='photos'),
     path('videos/', playlist, name='playlist'),

@@ -5,6 +5,8 @@ from django.db.models import Sum, Case, When, Value, IntegerField, Count, Q, F, 
 from django.utils.html import format_html
 from django_countries.fields import CountryField
 
+from vivalviar.core.managers import RankingQuerySet
+
 
 class Banner(models.Model):
     title = models.CharField('título', max_length=250, unique=True)
@@ -212,6 +214,8 @@ class Ranking(models.Model):
     player = models.ForeignKey('Player', on_delete=models.PROTECT)
     tournament = models.ForeignKey('Tournament', on_delete=models.PROTECT)
     position = models.PositiveIntegerField('posição')
+
+    objects = RankingQuerySet().as_manager()
 
     def __str__(self):
         return str(self.player)

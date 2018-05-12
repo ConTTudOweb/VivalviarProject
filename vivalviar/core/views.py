@@ -62,48 +62,62 @@ contact_us = TemplateView.as_view(
 
 
 class ChampionsPageView(TemplateView):
-    template_name = "champions.html"
+    template_name = "champions_individual.html"
 
     def get_context_data(self, **kwargs):
         context = super(ChampionsPageView, self).get_context_data(**kwargs)
-        ranking_first_list = Ranking.objects.filter(position__lte=3)\
-            .values('player__name', 'player__country') \
-            .annotate(
-                player_position_1st=Sum(
-                    Case(
-                        When(position=1, then=Value(1)),
-                        default=Value(0),
-                        output_field=IntegerField(),
-                    )
-                ),
-                player_position_2nd=Sum(
-                    Case(
-                        When(position=2, then=Value(1)),
-                        default=Value(0),
-                        output_field=IntegerField(),
-                    )
-                ),
-                player_position_3rd=Sum(
-                    Case(
-                        When(position=3, then=Value(1)),
-                        default=Value(0),
-                        output_field=IntegerField(),
-                    )
-                ),
-                player_position_total=Sum(
-                    Case(
-                        When(position__lte=3, then=Value(1)),
-                        default=Value(0),
-                        output_field=IntegerField(),
-                    )
-                ),
-            ) \
-            .order_by('-player_position_1st', '-player_position_2nd', '-player_position_3rd', 'player__name')
-        context['ranking_first_list'] = ranking_first_list
+        # ranking_first_list = Ranking.objects.filter(position__lte=3)\
+        #     .values('player__name', 'player__country') \
+        #     .annotate(
+        #         player_position_1st=Sum(
+        #             Case(
+        #                 When(position=1, then=Value(1)),
+        #                 default=Value(0),
+        #                 output_field=IntegerField(),
+        #             )
+        #         ),
+        #         player_position_2nd=Sum(
+        #             Case(
+        #                 When(position=2, then=Value(1)),
+        #                 default=Value(0),
+        #                 output_field=IntegerField(),
+        #             )
+        #         ),
+        #         player_position_3rd=Sum(
+        #             Case(
+        #                 When(position=3, then=Value(1)),
+        #                 default=Value(0),
+        #                 output_field=IntegerField(),
+        #             )
+        #         ),
+        #         player_position_total=Sum(
+        #             Case(
+        #                 When(position__lte=3, then=Value(1)),
+        #                 default=Value(0),
+        #                 output_field=IntegerField(),
+        #             )
+        #         ),
+        #     ) \
+        #     .order_by('-player_position_1st', '-player_position_2nd', '-player_position_3rd', 'player__name')
+        ranking_list = Ranking.objects.champions_individual()
+        context['ranking_list'] = ranking_list
         return context
 
 
 champions = ChampionsPageView.as_view()
+
+
+class ChampionsTeamPageView(TemplateView):
+    template_name = "champions_team.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ChampionsTeamPageView, self).get_context_data(**kwargs)
+        ranking_list = Ranking.objects.champions_team()
+        context['ranking_list'] = ranking_list
+        return context
+
+
+champions_team = ChampionsTeamPageView.as_view()
 
 
 class CircuitDetailView(DetailView):
