@@ -23,6 +23,28 @@
                         </tbody>
                     </table>
                 </div>
+
+                {% if object.score_by_team %}
+                    <div class="col-8">
+                        <h2>{{ object }} - (Por Time)</h2>
+                        <table class="table table-hover table-striped rank">
+                            <thead>
+                                <th class="text-right">#</th>
+                                <th>Time</th>
+                                <th class="text-right table-active">Pontos</th>
+                            </thead>
+                            <tbody>
+                            {% for player in object.teams_list|dictsortreversed:'points' %}
+                                <tr>
+                                    <td class="text-right"></td>
+                                    <td>{{ player.player__team__name }}</td>
+                                    <td class="text-right table-active">{{ player.points }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -138,37 +138,43 @@ class Player(models.Model):
 
 class Circuit(models.Model):
     description = models.CharField('descrição', max_length=250, unique=True)
+    score_by_team = models.BooleanField('pontuação por time', default=False)
 
     @property
     def players_list(self):
-        qs = Ranking.objects.filter(tournament__in=self.tournament_set.all()) \
-            .values('player__name', 'tournament') \
-            .annotate(
-            points=
-            (
-                (
-                    Count('tournament__ranking__id', output_field=IntegerField())
-                    - Avg('position', output_field=IntegerField())
-                    + 1
-                ) * 10
-            ) +
-            Case(
-                When(position=1, then=Value(15)),
-                When(position=2, then=Value(5)),
-                default=Value(0),
-                output_field=IntegerField(),
-            ),
+        # qs = Ranking.objects.filter(tournament__in=self.tournament_set.all()) \
+        #     .values('player__name', 'tournament') \
+        #     .annotate(
+        #     points=
+        #     (
+        #         (
+        #             Count('tournament__ranking__id', output_field=IntegerField())
+        #             - Avg('position', output_field=IntegerField())
+        #             + 1
+        #         ) * 10
+        #     ) +
+        #     Case(
+        #         When(position=1, then=Value(15)),
+        #         When(position=2, then=Value(5)),
+        #         default=Value(0),
+        #         output_field=IntegerField(),
+        #     ),
+        #
+        # ).order_by('player__name')
+        #
+        # grouped = itertools.groupby(qs, lambda d: d.get('player__name'))
+        #
+        # players_list = [{'player__name': label,
+        #                  'points': int(sum([x['points'] for x in value])),
+        #                  }
+        #                 for label, value in grouped]
+        #
+        # return players_list
+        return Ranking.objects.filter(tournament__in=self.tournament_set.all()).score_players()
 
-        ).order_by('player__name')
-
-        grouped = itertools.groupby(qs, lambda d: d.get('player__name'))
-
-        players_list = [{'player__name': label,
-                         'points': int(sum([x['points'] for x in value])),
-                         }
-                        for label, value in grouped]
-
-        return players_list
+    @property
+    def teams_list(self):
+        return Ranking.objects.filter(tournament__in=self.tournament_set.all()).exclude(player__team__isnull=True).score_teams()
 
     def __str__(self):
         return self.description
