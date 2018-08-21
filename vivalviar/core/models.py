@@ -174,7 +174,8 @@ class Circuit(models.Model):
 
     @property
     def teams_list(self):
-        return Ranking.objects.filter(tournament__in=self.tournament_set.all()).exclude(player__team__isnull=True).score_teams()
+        # return Ranking.objects.filter(tournament__in=self.tournament_set.all()).exclude(player__team__isnull=True).score_teams()
+        return Ranking.objects.filter(tournament__in=self.tournament_set.all()).score_teams()
 
     def __str__(self):
         return self.description

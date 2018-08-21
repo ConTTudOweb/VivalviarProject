@@ -35,11 +35,13 @@
                             </thead>
                             <tbody>
                             {% for player in object.teams_list|dictsortreversed:'points' %}
+                                {% if player.player__team__name %}
                                 <tr>
                                     <td class="text-right"></td>
                                     <td>{{ player.player__team__name }}</td>
                                     <td class="text-right table-active">{{ player.points }}</td>
                                 </tr>
+                                {% endif %}
                             {% endfor %}
                             </tbody>
                         </table>
