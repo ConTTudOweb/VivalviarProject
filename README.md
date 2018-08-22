@@ -26,5 +26,10 @@ Comando para desabilitar o collectstatic do heroku
 heroku config:set DISABLE_COLLECTSTATIC=1
 ```
 
+Comando para linkar o repositório do heroku após clonar o projeto em uma máquina nova
+```bash
+heroku git:remote -a vivalviar
+```
+
 Site para pegar o ID dos videos da play list
 [http://www.williamsportwebdeveloper.com/FavBackUp.aspx](http://www.williamsportwebdeveloper.com/FavBackUp.aspx)

@@ -1,4 +1,5 @@
 import itertools
+
 from django.db.models import QuerySet, Sum, Case, When, Value, IntegerField, Count, Avg
 
 
@@ -51,7 +52,7 @@ class RankingQuerySet(QuerySet):
             .order_by('-player_position_1st', '-player_position_2nd', '-player_position_3rd',
                       'player__team__name', 'player__team__logo')
 
-    def __score_base(self, field):
+    def __score_base(self, field, order):
         qs = self.values(field, 'tournament') \
             .annotate(
             points=
@@ -69,7 +70,8 @@ class RankingQuerySet(QuerySet):
                 output_field=IntegerField(),
             ),
 
-        ).order_by(field)
+            ) \
+            .order_by(field, order)
 
         grouped = itertools.groupby(qs, lambda d: d.get(field))
 
@@ -81,7 +83,7 @@ class RankingQuerySet(QuerySet):
         return players_list
 
     def score_players(self):
-        return self.__score_base('player__name')
+        return self.__score_base('player__name', 'player__name')
 
     def score_teams(self):
-        return self.__score_base('player__team__name')
+        return self.__score_base('player__team__name', 'player__name')
