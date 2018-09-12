@@ -15,6 +15,24 @@
     imagens de poker, imagem de cartas, mesa de poker, vivalviar, vivalviarpoker, poker amador, poker profissional">
 {% endblock head %}
 
+{% block og %}
+    <meta property="og:title" content="Fotos" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{% static "assets/img/logo.png" %}" />
+    <meta property="og:description" content="Nosso álbum de fotos de nossa história e de nossos torneios online e presenciais." />
+    <meta property="og:site_name" content="Vivalviar Poker" />
+{% endblock og %}
+
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@VivalviarPoker">
+    <meta name="twitter:title" content="Fotos">
+    <meta name="twitter:description" content="Nosso álbum de fotos de nossa história e de nossos torneios online e presenciais.">
+    <meta name="twitter:creator" content="@VivalviarPoker">
+    <meta name="twitter:image" content="{% static "assets/img/logo.png" %}">
+    <meta name="twitter:domain" content="www.vivalviar.com.br">
+{% endblock twitter %}
+
 {% block script %}
     <script src="{% static "galereya/js/jquery.galereya.min.js" %}"></script>
     <script>

@@ -13,6 +13,24 @@
     campeonato de poker, campeonatos de poker">
 {% endblock head %}
 
+{% block og %}
+    <meta property="og:title" content="Campeões" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{% static "assets/img/logo.png" %}" />
+    <meta property="og:description" content="Ranking de todos os nossos campeões do Vivalviar Poker." />
+    <meta property="og:site_name" content="Vivalviar Poker" />
+{% endblock og %}
+
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@VivalviarPoker">
+    <meta name="twitter:title" content="Campeões">
+    <meta name="twitter:description" content="Ranking de todos os nossos campeões do Vivalviar Poker.">
+    <meta name="twitter:creator" content="@VivalviarPoker">
+    <meta name="twitter:image" content="{% static "assets/img/logo.png" %}">
+    <meta name="twitter:domain" content="www.vivalviar.com.br">
+{% endblock twitter %}
+
 {% block content %}
     <div class="section" id="historico">
         <div class="container">
