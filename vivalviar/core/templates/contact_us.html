@@ -1,4 +1,31 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <title>Fale Conosco | Vivalviar Poker</title>
+    <meta name="description" content="Tem alguma dúvida ou sugestão? Entre em contato, teremos o maior prazer em atendê-lo.">
+    <meta name="keywords" content="poker, pokerstars, poker star, poker senhas, poker online, poker regras, poker gratis,
+    como jogar poker, jogar poker, torneios de poker, quem joga poker, jogadores de poker, contato do poker,
+    contato vivalviar, suporte vivalviar, vivalviar é confiavel?,  vivalviar, vivalviarpoker, poker amador, poker profissional">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:title" content="Fale Conosco" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{% static "assets/img/logo.png" %}" />
+    <meta property="og:description" content="Tem alguma dúvida ou sugestão? Entre em contato, teremos o maior prazer em atendê-lo." />
+    <meta property="og:site_name" content="Vivalviar Poker" />
+{% endblock og %}
+
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@VivalviarPoker">
+    <meta name="twitter:title" content="Fale Conosco">
+    <meta name="twitter:description" content="Tem alguma dúvida ou sugestão? Entre em contato, teremos o maior prazer em atendê-lo.">
+    <meta name="twitter:creator" content="@VivalviarPoker">
+    <meta name="twitter:image" content="{% static "assets/img/logo.png" %}">
+    <meta name="twitter:domain" content="www.vivalviar.com.br">
+{% endblock twitter %}
 
 {% block content %}
     <div class="section" id="fale_conosco">
@@ -13,7 +40,7 @@
                         </p>
                         E-mail: <a
                             href="mailto:vivalviarpoker.contato@gmail.com">vivalviarpoker.contato@gmail.com</a><br>
-                        WhatsApp: <a href="tel:+5527998542169">+55 27 99854-2169</a>
+                        WhatsApp: <a href="https://api.whatsapp.com/send?phone=5527998542169">+55 27 99854-2169</a>
                     </div>
                 </div>
             </div>

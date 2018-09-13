@@ -1,5 +1,41 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 {% load cloudinary %}
+
+{% block head %}
+    <title>Participações Especiais | Vivalviar Poker</title>
+    <meta name="description" content="Ao longo de nossa história no cenário do Poker, fizemos muitos amigos, parceiros e irmãos.">
+    <meta name="keywords" content="poker, pokerstars, poker star, poker senhas, poker online, poker regras, poker gratis,
+    como jogar poker, jogar poker, torneios de poker, quem joga poker, jogadores de poker, famosos que jogam poker,
+    Alexandre Fracari, Alexandre Riveiro, Allisson Dantas, Amos Ben, Armando Sbrissa, Bruno Foster, Caio Hey, Caio Machado,
+    Caio Pessagno, Carla Del Castilho, Carol Dupre, Carol Ventura, Celeste Orona, Claudio Baptista, Daniel Hurtado,
+    Dimi Matsubara, Eder Ferronato, Eduardo Bernal, Emanuel Fernandez, Felipe de Paulo, Felix Schneiders, Fernando Araujo,
+    Fernando  Scherer, Xuxa, Francisco Chiconogue, Gabriel Otranto, Gustavo Pinto, Gustavo Soler, Helio Neves,
+    Henrique Onodera, Hernán Barcos, Hugo Almeida, Igianni Bertoldi, Janna Estrozi, João Vitor Ferrari, Laura Cintra,
+    Laurie Tournier, Lucas Fauth, Luiz Felipe Muller, Luiz Gustavo Kamei, Luiz  Igashi, Tofuh, Luka Kovac, Marcel Carli,
+    Marcelo Fonseca, Marina Seganfredo, Michel Henrique, Nayara Rocha, Nenê, Oderlandio Moura, Oscar Alache,
+    Paulo Nakashima, Pedro Gusmaa, Pedro PadilhaSP, Rafael Caiaffa, Rafael Lirola, Rafael Pandolfo, Ramon Pescanco Sfalsin,
+    Reidir de Melo, Renan Bruschi, Renata Teixeira, Ronaldo Fernandes, Thiago Decano, Thiago Grigoletti, Thiago Rachadel,
+    Vinícius Matos, Vinicius Silva, Vivian Saliba, Weider Gutierrez, vivalviar, vivalviarpoker, poker amador, poker profissional">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:title" content="Participações Especiais" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{% static "assets/img/logo.png" %}" />
+    <meta property="og:description" content="Ao longo de nossa história no cenário do Poker, fizemos muitos amigos, parceiros e irmãos." />
+    <meta property="og:site_name" content="Vivalviar Poker" />
+{% endblock og %}
+
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@VivalviarPoker">
+    <meta name="twitter:title" content="Participações Especiais">
+    <meta name="twitter:description" content="Ao longo de nossa história no cenário do Poker, fizemos muitos amigos, parceiros e irmãos.">
+    <meta name="twitter:creator" content="@VivalviarPoker">
+    <meta name="twitter:image" content="{% static "assets/img/logo.png" %}">
+    <meta name="twitter:domain" content="www.vivalviar.com.br">
+{% endblock twitter %}
 
 {% block content %}
     <div class="section section-participacoes text-center" id="participacoes">
