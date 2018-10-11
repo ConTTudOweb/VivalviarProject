@@ -1,3 +1,5 @@
+import itertools
+
 from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Ranking, Circuit
@@ -125,3 +127,24 @@ class CircuitDetailView(DetailView):
 
 class CircuitListView(ListView):
     model = Circuit
+
+
+class BestYearPageView(TemplateView):
+    template_name = "best_year.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(BestYearPageView, self).get_context_data(**kwargs)
+        ranking_list = []
+        for circuit in Circuit.objects.all():
+            ranking_list += circuit.players_list
+
+        ranking_list = sorted(ranking_list, key=lambda k: k['player__name'])
+
+        grouped = itertools.groupby(ranking_list, lambda d: d.get('player__name'))
+        ranking_list = [{'player__name': label,
+                         'points': int(sum([x['points'] for x in value])),
+                         }
+                        for label, value in grouped]
+
+        context['ranking_list'] = ranking_list
+        return context

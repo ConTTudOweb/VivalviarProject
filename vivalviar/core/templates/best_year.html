@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block head %}
+    <title>Melhores do Ano | Vivalviar Poker</title>
+    <meta name="description" content="Página dedicada aos melhores do ano da Vivalviar Poker.">
+    <meta name="keywords" content="poker, pokerstars, poker star, poker senhas, poker online, poker regras, poker gratis,
+    como jogar poker, jogar poker, torneios de poker, quem joga poker, jogadores de poker, vivalviar, vivalviarpoker,
+    poker amador, poker profissional, melhores do poker, melhores do ano, melhor jogador do ano,
+    melhores jogadores de poker, melhor do poker">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:title" content="Melhores do Ano" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{% static "assets/img/logo.png" %}" />
+    <meta property="og:description" content="Página dedicada aos melhores do ano da Vivalviar Poker." />
+    <meta property="og:site_name" content="Vivalviar Poker" />
+{% endblock og %}
+
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@VivalviarPoker">
+    <meta name="twitter:title" content="Melhores do Ano">
+    <meta name="twitter:description" content="Página dedicada aos melhores do ano da Vivalviar Poker.">
+    <meta name="twitter:creator" content="@VivalviarPoker">
+    <meta name="twitter:image" content="{% static "assets/img/logo.png" %}">
+    <meta name="twitter:domain" content="www.vivalviar.com.br">
+{% endblock twitter %}
+
+{% block content %}
+    <div class="section" id="historico">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h2>Melhores do Ano</h2>
+                    <table class="table table-hover table-striped rank">
+                        <thead>
+                            <th class="text-right">#</th>
+                            <th>Nome</th>
+                            <th class="text-right table-active">Pontos</th>
+                        </thead>
+                        <tbody>
+                        {% for champions in ranking_list|dictsortreversed:'points' %}
+                            <tr>
+                                <td class="text-right"></td>
+                                <td>{{ champions.player__name }}</td>
+                                <td class="text-right table-active">{{ champions.points }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
