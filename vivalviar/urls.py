@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from .core.views import home, history, special_participation, photos, playlist, contact_us, champions, \
-    CircuitDetailView, CircuitListView, champions_team, BestYearPageView
+    CircuitDetailView, CircuitListView, champions_team, BestYearPageView, get_player_stats
 
 urlpatterns = []
 if settings.DEVELOPER:
@@ -33,6 +33,7 @@ urlpatterns += [
     path('', home, name='home'),
     path('historia/', history, name='history'),
     path('campeoes/', champions, name='champions'),
+    path('ajax/get_player_stats/', get_player_stats, name='get_player_stats'),
     path('campeoes/times/', champions_team, name='champions_team'),
     path('participacoes_especiais/', special_participation, name='special_participation'),
     path('melhores_do_ano/', BestYearPageView.as_view(), name='best_year'),

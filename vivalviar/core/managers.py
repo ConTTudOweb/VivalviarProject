@@ -38,7 +38,7 @@ class RankingQuerySet(QuerySet):
         )
 
     def champions_individual(self):
-        return self.values('player__name', 'player__country') \
+        return self.values('player__pk', 'player__name', 'player__country') \
             .__champions_base() \
             .order_by('-player_position_1st',
                       '-player_position_2nd',

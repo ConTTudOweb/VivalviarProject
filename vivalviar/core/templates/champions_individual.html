@@ -11,5 +11,5 @@
 
 {% block champions_tds %}
     <td><i class="{{ country.flag_css }}"></i> {{ country.name }}</td>
-    <td>{{ champions.player__name }}</td>
+    <td><a href="javascript:void(0)" onclick="showStats({{ champions.player__pk }});">{{ champions.player__name }}</a></td>
 {% endblock %}

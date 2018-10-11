@@ -14,11 +14,11 @@
 {% endblock head %}
 
 {% block og %}
-    <meta property="og:title" content="Campeões" />
-    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-    <meta property="og:image" content="{% static "assets/img/logo.png" %}" />
-    <meta property="og:description" content="Ranking de todos os nossos campeões do Vivalviar Poker." />
-    <meta property="og:site_name" content="Vivalviar Poker" />
+    <meta property="og:title" content="Campeões"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:image" content="{% static "assets/img/logo.png" %}"/>
+    <meta property="og:description" content="Ranking de todos os nossos campeões do Vivalviar Poker."/>
+    <meta property="og:site_name" content="Vivalviar Poker"/>
 {% endblock og %}
 
 {% block twitter %}
@@ -39,41 +39,87 @@
                     <h2>{% block champions_title %}{% endblock %}</h2>
                     <table class="table table-hover table-striped rank">
                         <thead>
-                            <th class="text-right">#</th>
-                            {% block champions_ths %}{% endblock %}
-                            <th class="text-right table-warning img-raised">
-                                1º
-                                <img src="{% static "assets/img/medal/medal-1st_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
-                            </th>
-                            <th class="text-right">
-                                2º
-                                <img src="{% static "assets/img/medal/medal-2nd_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
-                            </th>
-                            <th class="text-right">
-                                3º
-                                <img src="{% static "assets/img/medal/medal-3rd_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
-                            </th>
-                            <th class="text-right">
-                                Total
-                                <img src="{% static "assets/img/medal/medals-total_160_good.png" %}" class="img-responsive" style="max-height: 1rem">
-                            </th>
+                        <th class="text-right">#</th>
+                        {% block champions_ths %}{% endblock %}
+                        <th class="text-right table-warning img-raised">
+                            1º
+                            <img src="{% static "assets/img/medal/medal-1st_160_good.png" %}" class="img-responsive"
+                                 style="max-height: 1rem">
+                        </th>
+                        <th class="text-right">
+                            2º
+                            <img src="{% static "assets/img/medal/medal-2nd_160_good.png" %}" class="img-responsive"
+                                 style="max-height: 1rem">
+                        </th>
+                        <th class="text-right">
+                            3º
+                            <img src="{% static "assets/img/medal/medal-3rd_160_good.png" %}" class="img-responsive"
+                                 style="max-height: 1rem">
+                        </th>
+                        <th class="text-right">
+                            Total
+                            <img src="{% static "assets/img/medal/medals-total_160_good.png" %}" class="img-responsive"
+                                 style="max-height: 1rem">
+                        </th>
                         </thead>
                         <tbody>
-                            {% for champions in ranking_list %}
-                                {% get_country champions.player__country as country %}
-                                <tr>
-                                    <td class="text-right"></td>
-                                    {% block champions_tds %}{% endblock %}
-                                    <td class="text-right table-warning img-raised">{{ champions.player_position_1st }}</td>
-                                    <td class="text-right">{{ champions.player_position_2nd }}</td>
-                                    <td class="text-right">{{ champions.player_position_3rd }}</td>
-                                    <td class="text-right">{{ champions.player_position_total }}</td>
-                                </tr>
-                            {% endfor %}
+                        {% for champions in ranking_list %}
+                            {% get_country champions.player__country as country %}
+                            <tr>
+                                <td class="text-right"></td>
+                                {% block champions_tds %}{% endblock %}
+                                <td class="text-right table-warning img-raised">{{ champions.player_position_1st }}</td>
+                                <td class="text-right">{{ champions.player_position_2nd }}</td>
+                                <td class="text-right">{{ champions.player_position_3rd }}</td>
+                                <td class="text-right">{{ champions.player_position_total }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+{#    TODO: Mexer daqui pra baixo!!!#}
+    <!-- Modal -->
+    <div class="modal fade" id="statsPlayerModal" tabindex="-1" role="dialog" aria-labelledby="statsPlayerModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="statsPlayerModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Nome: <span id="statsPlayerModal_name"></span><br>
+                    Torneios: <span id="statsPlayerModal_tournament_count"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/javascript">
+        function showStats(jogador_id) {
+            $.ajax({
+                url: '/ajax/get_player_stats/',
+                data: {
+                    'pk': jogador_id
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $("#statsPlayerModal_name").text(data.name);
+                    $("#statsPlayerModal_tournament_count").text(data.tournament_count);
+                    $('#statsPlayerModal').modal();
+                }
+            });
+        };
+    </script>
+
 {% endblock content %}

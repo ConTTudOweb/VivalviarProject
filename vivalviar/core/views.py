@@ -1,8 +1,9 @@
 import itertools
 
+from django.http import JsonResponse
 from django.views.generic import TemplateView, DetailView, ListView
 
-from .models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Ranking, Circuit
+from .models import Banner, Sponsor, SpecialParticipation, Photo, PlayList, Ranking, Circuit, Player
 
 
 class HomePageView(TemplateView):
@@ -60,6 +61,16 @@ playlist = PlayListPageView.as_view()
 contact_us = TemplateView.as_view(
     template_name="contact_us.html"
 )
+
+
+# TODO: Falta todos os campos necessários
+def get_player_stats(request):
+    player__pk = request.GET.get('pk', None)
+    data = {
+        'name': Player.objects.get(pk=player__pk).name,
+        'tournament_count': Ranking.objects.filter(player__pk=player__pk).count()
+    }
+    return JsonResponse(data)
 
 
 class ChampionsPageView(TemplateView):
